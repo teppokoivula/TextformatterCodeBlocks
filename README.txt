@@ -7,7 +7,7 @@ Note: this is not a complete Markdown implementation, but rather a home-baked im
 ## Getting started
 
 - Copy (or clone) the TextformatterCodeBlocks directory to /site/modules/
-- Go to Admin > Modules, hit "Check for new modules", and install TextformatterCodeBlocks
+- Go to Admin > Modules, hit "Refresh", and install TextformatterCodeBlocks
 - Enable "Code Blocks Textformatter" for fields in which you wish to use code blocks
 
 IMPORTANT: if you use Code Blocks Textformatter with a regular text or textarea field, make sure that you enable HTML Entity Encoder or use another method of escaping entities!
