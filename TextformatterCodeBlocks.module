@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * Textformatter Code Blocks
+ * 
+ * Textformatter for Markdown style code blocks. More about the syntax here:
+ * https://help.github.com/articles/creating-and-highlighting-code-blocks/
+ * 
+ * @copyright 2018 Teppo Koivula
+ * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License, version 2
+ */
+class TextformatterCodeBlocks extends Textformatter {
+
+    /**
+     * Return module information.
+     *
+     * @return array Module info
+     */
+    public static function getModuleInfo() {
+        return array(
+            'title' => 'Code Blocks Textformatter',
+            'summary' => 'Converts content within backticks into code blocks.',
+            'version' => '0.0.8',
+        );
+    }
+
+    /**
+     * Format the given text string.
+     *
+     * @param string $str
+     */
+    public function format(&$str) {
+        
+        // use fast strpos check to make sure that $str contains backticks
+        if (strpos($str, "`") === false) return;
+
+        // remove HTML line breaks from between three backtics
+        if (preg_match_all('/(?:\<p(?:re)?(?: .*?)?\>)?[\r\n\s]*```(?:([a-z0-9-_]*)(?:\<br.*?\>|[\r\n\s]*)?)(.*?)```[\r\n\s]*(?:\<\/p(?:re)?\>)?/si', $str, $matches)) {
+            foreach ($matches[2] as $key => $value) {
+                $value = preg_replace('/\<br.*?\>/i', '', $value);
+                $value = '<pre class="code-block"><code class="language-' . $matches[1][$key] . '">' . $value . '</code></pre>';
+                $str = str_replace($matches[0][$key], $value, $str);
+            }
+        }
+        
+        // replace all double backticks with HTML entity for single backtick
+        // to allow single backticks in content by escaping them with another
+        $str = str_replace("``", "&#96;", $str);
+        
+        // replace content wrapped with single backticks
+        $str = preg_replace(
+            '/`(.*?)`/',
+            '<code class="code-block">$1</code>',
+            $str
+        );
+        
+    }
+
+}
