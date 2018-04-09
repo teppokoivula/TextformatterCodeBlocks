@@ -20,7 +20,7 @@ class TextformatterCodeBlocks extends Textformatter {
         return array(
             'title' => 'Code Blocks Textformatter',
             'summary' => 'Converts content within backticks into code blocks.',
-            'version' => '0.0.8',
+            'version' => '0.0.9',
         );
     }
 
@@ -35,7 +35,7 @@ class TextformatterCodeBlocks extends Textformatter {
         if (strpos($str, "`") === false) return;
 
         // remove HTML line breaks from between three backtics
-        if (preg_match_all('/(?:\<p(?:re)?(?: .*?)?\>)?[\r\n\s]*```(?:([a-z0-9-_]*)(?:\<br.*?\>|[\r\n\s]*)?)(.*?)```[\r\n\s]*(?:\<\/p(?:re)?\>)?/si', $str, $matches)) {
+        if (preg_match_all('/(?:\<p(?:re)?(?: [^\>]?)?\>)?\s*```(?:([a-z0-9-_]*)(?:\<br.*?\>|[\r\n\s]*)?)(.*?)```\s*(?:\<\/p(?:re)?\>)?/si', $str, $matches)) {
             foreach ($matches[2] as $key => $value) {
                 $value = preg_replace('/\<br.*?\>/i', '', $value);
                 $value = '<pre class="code-block"><code class="language-' . $matches[1][$key] . '">' . $value . '</code></pre>';
