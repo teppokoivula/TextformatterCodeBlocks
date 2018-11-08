@@ -20,7 +20,7 @@ class TextformatterCodeBlocks extends Textformatter {
         return array(
             'title' => 'Code Blocks Textformatter',
             'summary' => 'Converts content within backticks into code blocks.',
-            'version' => '0.0.9',
+            'version' => '0.1.0',
         );
     }
 
@@ -34,22 +34,27 @@ class TextformatterCodeBlocks extends Textformatter {
         // use fast strpos check to make sure that $str contains backticks
         if (strpos($str, "`") === false) return;
 
-        // remove HTML line breaks from between three backtics
-        if (preg_match_all('/(?:\<p(?:re)?(?: [^\>]?)?\>)?\s*```(?:([a-z0-9-_]*)(?:\<br.*?\>|[\r\n\s]*)?)(.*?)```\s*(?:\<\/p(?:re)?\>)?/si', $str, $matches)) {
-            foreach ($matches[2] as $key => $value) {
-                $value = preg_replace('/\<br.*?\>/i', '', $value);
-                $value = '<pre class="code-block"><code class="language-' . $matches[1][$key] . '">' . $value . '</code></pre>';
-                $str = str_replace($matches[0][$key], $value, $str);
+        // wrap content within three backticks with code blocks, removing any
+        // extraneous HTML line breaks (<br> tags) in the process
+        if (strpos($str, "```") !== false) {
+            if (preg_match_all('/(?:\<p(?:re)?(?: .*?)?\>)?[\r\n\s]*```(?:([a-z0-9-_]*)(?:(?:\<br\W*?\>)*[\r\n\s]*)?)(.*?)```[\r\n\s]*(?:\<\/p(?:re)?\>)?/si', $str, $matches)) {
+                foreach ($matches[2] as $key => $value) {
+                    $value = preg_replace('/\<br\W*\>/i', '', $value);
+                    $value = '<pre class="code-block"><code class="language-' . $matches[1][$key] . '">' . $value . '</code></pre>';
+                    $str = str_replace($matches[0][$key], $value, $str);
+                }
             }
         }
         
-        // replace all double backticks with HTML entity for single backtick
-        // to allow single backticks in content by escaping them with another
+        // replace remaining double backticks with the HTML entity for a single
+        // backtick, so that a single backtick can still be used within content
+        // after being escaped with another single backtick
         $str = str_replace("``", "&#96;", $str);
         
-        // replace content wrapped with single backticks
+        // wrap content wrapped with single backticks but not yet placed within
+        // a code block with code blocks
         $str = preg_replace(
-            '/`(.*?)`/',
+            '/\<code(?: .*?)?>.*\<\/code\>(*SKIP)(*F)|`(.*?)`/s',
             '<code class="code-block">$1</code>',
             $str
         );
