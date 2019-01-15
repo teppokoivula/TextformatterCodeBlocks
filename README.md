@@ -34,7 +34,7 @@ echo "This PHP code is easier for a syntax highlighter to identify.";
 
 The end result of fenced code blocks looks like this:
 
-<pre class="code-block"><code class="language-php">&lt;?php
+<pre class="code-block code-block--fenced"><code class="language-php">&lt;?php
 echo "This PHP code is easier for a syntax highlighter to identify.";</code></pre>
 
 ### Inline code blocks
@@ -43,7 +43,7 @@ echo "This PHP code is easier for a syntax highlighter to identify.";</code></pr
 
 The end result of inline code blocks looks like this:
 
-<p>While fenced code blocks are great for longer code snippets, sometimes <code class="code-block">&lt;?php echo "inline code blocks"; ?&gt;</code> make more sense.</p>
+<p>While fenced code blocks are great for longer code snippets, sometimes <code class="code-block code-block--inline">&lt;?php echo "inline code blocks"; ?&gt;</code> make more sense.</p>
 
 ## Enabling syntax highlighter
 
