@@ -20,7 +20,7 @@ class TextformatterCodeBlocks extends Textformatter {
         return array(
             'title' => 'Code Blocks Textformatter',
             'summary' => 'Converts content within backticks into code blocks.',
-            'version' => '0.1.0',
+            'version' => '0.2.0',
         );
     }
 
@@ -40,7 +40,7 @@ class TextformatterCodeBlocks extends Textformatter {
             if (preg_match_all('/(?:\<p(?:re)?(?: .*?)?\>)?[\r\n\s]*```(?:([a-z0-9-_]*)(?:(?:\<br\W*?\>)*[\r\n\s]*)?)(.*?)```[\r\n\s]*(?:\<\/p(?:re)?\>)?/si', $str, $matches)) {
                 foreach ($matches[2] as $key => $value) {
                     $value = preg_replace('/\<br\W*\>/i', '', $value);
-                    $value = '<pre class="code-block"><code class="language-' . $matches[1][$key] . '">' . $value . '</code></pre>';
+                    $value = '<pre class="code-block code-block--fenced"><code class="language-' . $matches[1][$key] . '">' . $value . '</code></pre>';
                     $str = str_replace($matches[0][$key], $value, $str);
                 }
             }
@@ -55,7 +55,7 @@ class TextformatterCodeBlocks extends Textformatter {
         // a code block with code blocks
         $str = preg_replace(
             '/\<code(?: .*?)?>.*\<\/code\>(*SKIP)(*F)|`(.*?)`/s',
-            '<code class="code-block">$1</code>',
+            '<code class="code-block code-block--inline">$1</code>',
             $str
         );
         
