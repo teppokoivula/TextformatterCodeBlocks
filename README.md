@@ -22,17 +22,21 @@ Code blocks should work fine when wrapped in `<p>` or `<pre>` tags, so you can u
 
 Simple example:
 
+``````
 ```
 <?php
 echo "This is a fenced code block.";
 ```
+``````
 
 With fenced code blocks you can also specify the language for a syntax highlighter:
 
+``````
 ```php
 <?php
 echo "This PHP code is easier for a syntax highlighter to identify.";
 ```
+``````
 
 The end result of fenced code blocks looks like this:
 
