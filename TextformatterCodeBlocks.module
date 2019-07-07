@@ -6,7 +6,7 @@
  * Textformatter for Markdown style code blocks. More about the syntax here:
  * https://help.github.com/articles/creating-and-highlighting-code-blocks/
  * 
- * @copyright 2018 Teppo Koivula
+ * @copyright 2018-2019 Teppo Koivula
  * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License, version 2
  */
 class TextformatterCodeBlocks extends Textformatter {
@@ -14,25 +14,29 @@ class TextformatterCodeBlocks extends Textformatter {
     /**
      * Return module information.
      *
-     * @return array Module info
+     * @return array Module info.
      */
     public static function getModuleInfo() {
         return array(
             'title' => 'Code Blocks Textformatter',
             'summary' => 'Converts content within backticks into code blocks.',
-            'version' => '0.2.0',
+            'version' => '1.0.0',
         );
     }
 
     /**
      * Format the given text string.
      *
-     * @param string $str
+     * @param string $str Original string.
      */
     public function format(&$str) {
-        
+
         // use fast strpos check to make sure that $str contains backticks
         if (strpos($str, "`") === false) return;
+
+        // allow literal three backticks by replacing groups of six backticks
+        // with their respective HTML Entities
+        $str = str_replace("``````", "&#96;&#96;&#96;", $str);
 
         // wrap content within three backticks with code blocks, removing any
         // extraneous HTML line breaks (<br> tags) in the process
@@ -45,12 +49,12 @@ class TextformatterCodeBlocks extends Textformatter {
                 }
             }
         }
-        
+
         // replace remaining double backticks with the HTML entity for a single
         // backtick, so that a single backtick can still be used within content
         // after being escaped with another single backtick
         $str = str_replace("``", "&#96;", $str);
-        
+
         // wrap content wrapped with single backticks but not yet placed within
         // a code block with code blocks
         $str = preg_replace(
