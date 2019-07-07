@@ -1,0 +1,24 @@
+{
+    "name": "teppokoivula/textformatter-code-blocks",
+    "type": "pw-module",
+    "description": "ProcessWire CMS/CMF Textformatter module for creating Markdown style code blocks.",
+    "keywords": [
+        "processwire",
+        "module",
+        "markdown",
+        "textformatter"
+    ],
+    "homepage": "https://github.com/teppokoivula/TextformatterCodeBlocks",
+    "license": "GPL-2.0-only",
+    "authors": [
+        {
+            "name": "Teppo Koivula",
+            "homepage": "https://github.com/teppokoivula",
+            "email": "teppo.koivula@gmail.com"
+        }
+    ],
+    "require": {
+        "processwire/processwire": "^3.0",
+        "wireframe-framework/processwire-composer-installer": "^1.0"
+    }
+}
