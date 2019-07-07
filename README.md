@@ -14,7 +14,9 @@ IMPORTANT: if you use Code Blocks Textformatter with a regular text or textarea 
 
 ## Code blocks
 
-Code blocks should work fine when wrapped in <p> or <pre> tags, so you can use them with RTE, such as CKEditor. This module supports two types of code blocks: fenced and inline.
+Code blocks should work fine when wrapped in `<p>` or `<pre>` tags, so you can use them with RTE, such as CKEditor. This module supports two types of code blocks: fenced and inline.
+
+*Note: following code examples have been escaped for better readability when rendered in GitHub. In a nutshell the syntax for fenced code blocks is three backticks around a code block, and for inline code blocks just sourround a specific piece of code with single backticks.*
 
 ### Fenced code blocks
 
@@ -34,16 +36,16 @@ echo "This PHP code is easier for a syntax highlighter to identify.";
 
 The end result of fenced code blocks looks like this:
 
-<pre class="code-block code-block--fenced"><code class="language-php">&lt;?php
-echo "This PHP code is easier for a syntax highlighter to identify.";</code></pre>
+`<pre class="code-block code-block--fenced"><code class="language-php">&lt;?php
+echo "This PHP code is easier for a syntax highlighter to identify.";</code></pre>`
 
 ### Inline code blocks
 
-<p>While fenced code blocks are great for longer code snippets, sometimes `<?php echo "inline code blocks"; ?>` make more sense.</p>
+``<p>While fenced code blocks are great for longer code snippets, sometimes `<?php echo "inline code blocks"; ?>` make more sense.</p>``
 
 The end result of inline code blocks looks like this:
 
-<p>While fenced code blocks are great for longer code snippets, sometimes <code class="code-block code-block--inline">&lt;?php echo "inline code blocks"; ?&gt;</code> make more sense.</p>
+`<p>While fenced code blocks are great for longer code snippets, sometimes <code class="code-block code-block--inline">&lt;?php echo "inline code blocks"; ?&gt;</code> make more sense.</p>`
 
 ## Enabling syntax highlighter
 
