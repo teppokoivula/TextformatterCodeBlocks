@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "processwire/processwire": "^3.0",
+        "processwire/processwire": ">=3.0.0",
         "wireframe-framework/processwire-composer-installer": "^1.0"
     }
 }

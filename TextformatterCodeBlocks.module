@@ -20,7 +20,7 @@ class TextformatterCodeBlocks extends Textformatter {
         return array(
             'title' => 'Code Blocks Textformatter',
             'summary' => 'Converts content within backticks into code blocks.',
-            'version' => '1.0.0',
+            'version' => '1.0.1',
         );
     }
 
