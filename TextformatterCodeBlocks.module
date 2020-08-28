@@ -6,7 +6,7 @@
  * Textformatter for Markdown style code blocks. More about the syntax here:
  * https://help.github.com/articles/creating-and-highlighting-code-blocks/
  * 
- * @copyright 2018-2019 Teppo Koivula
+ * @copyright 2018-2020 Teppo Koivula
  * @license http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License, version 2
  */
 class TextformatterCodeBlocks extends Textformatter {
@@ -17,11 +17,11 @@ class TextformatterCodeBlocks extends Textformatter {
      * @return array Module info.
      */
     public static function getModuleInfo() {
-        return array(
+        return [
             'title' => 'Code Blocks Textformatter',
             'summary' => 'Converts content within backticks into code blocks.',
-            'version' => '1.0.1',
-        );
+            'version' => '1.0.2',
+        ];
     }
 
     /**
@@ -58,7 +58,7 @@ class TextformatterCodeBlocks extends Textformatter {
         // wrap content wrapped with single backticks but not yet placed within
         // a code block with code blocks
         $str = preg_replace(
-            '/\<code(?: .*?)?>.*\<\/code\>(*SKIP)(*F)|`(.*?)`/s',
+            '/\<code(?: .*?)?>.*?\<\/code\>(*SKIP)(*F)|`(.*?)`/s',
             '<code class="code-block code-block--inline">$1</code>',
             $str
         );
